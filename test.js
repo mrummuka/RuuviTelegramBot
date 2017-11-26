@@ -24,5 +24,3 @@ const Ruuvitags = {
 const TELEGRAM_BOT_TOKEN = "<your_bot_token >";
 
 let ruuviTelegramBot = new RuuviTelegramBot(places, Ruuvitags, TELEGRAM_BOT_TOKEN);
-
-ruuviTelegramBot.start();
