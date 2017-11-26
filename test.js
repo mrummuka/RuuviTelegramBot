@@ -1,4 +1,4 @@
-const RuuviTelegramBot = require("./RuuviTelegramBot");
+const RuuviTelegramBot = require("ruuvitag-telegram-bot");
 
 //my Ruuvitags
 const places = ["place1", "place2"];
