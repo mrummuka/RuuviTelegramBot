@@ -1,6 +1,6 @@
 {
   "name": "ruuvitag-telegram-bot",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Simple Telegram bot retrieving data from Ruuvitag sensors",
   "main": "RuuviTelegramBot",
   "dependencies": {
@@ -23,7 +23,7 @@
     "ruuvitag"
   ],
   "author": "france193 <france193.htc@gmail.com>",
-  "license": "MIT",
+  "license": "BSD 3-Clause License",
   "bugs": {
     "url": "https://github.com/france193/RuuviTelegramBot/issues"
   },
