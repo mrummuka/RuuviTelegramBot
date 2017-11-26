@@ -1,0 +1,31 @@
+{
+  "name": "ruuvitag-telegram-bot",
+  "version": "0.0.1",
+  "description": "Simple Telegram bot retrieving data from Ruuvitag sensors",
+  "main": "RuuviTelegramBot",
+  "dependencies": {
+    "node-ruuvitag": "^3.2.0",
+    "telebot": "^1.2.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/france193/RuuviTelegramBot"
+  },
+  "keywords": [
+    "bot",
+    "api",
+    "wrapper",
+    "telebot",
+    "telegram",
+    "telegram api",
+    "telegram bot",
+    "telegram bot api",
+    "ruuvitag"
+  ],
+  "author": "france193 <france193.htc@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/france193/RuuviTelegramBot/issues"
+  },
+  "homepage": "https://github.com/france193/RuuviTelegramBot"
+}
