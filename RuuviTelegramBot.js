@@ -3,17 +3,15 @@ const TeleBot = require("telebot");
 
 class RuuviTelegramBot {
 	constructor(places, ruuvitags, bot_token) {
-		let all = "all_available_ruuvitags";
-
 		// initialize bot
-		this.bot = new TeleBot({
+		let bot = new TeleBot({
 			token: bot_token,
 			polling: {
 				interval: 1000,
 				timeout: 0,
 				limit: 100,
-				retryTimeout: 3000,
-			},
+				retryTimeout: 3000
+			}
 		});
 
 		// set up listeners: on tag found
@@ -24,29 +22,31 @@ class RuuviTelegramBot {
 		});
 
 		// command available on Telegram
-		this.bot.on([all], (msg) => {
+		bot.on(["/start"], (msg) => {
 			let response = "Hi! Here there are all available Ruuvitags:\n";
 
 			places.forEach(function (element) {
 				response += "/" + element + "\n";
 			});
 
-			response += all + "\n";
+			response += "/all_available_ruuvitags\n";
 
 			msg.reply.text(response);
 		});
 
 		places.forEach(function (element) {
-			this.bot.on(["/" + element], (msg) => {
+			bot.on(["/" + element], (msg) => {
 				returnData(msg, retrieveData(element));
 			});
 		});
 
-		this.bot.on([all], (msg) => {
+		bot.on(["/all_available_ruuvitags"], (msg) => {
 			places.forEach(function (element) {
 				returnData(msg, retrieveData(element));
 			})
 		});
+
+		bot.start();
 
 		function retrieveData(place) {
 			for (let key in ruuvitags) {
@@ -63,7 +63,7 @@ class RuuviTelegramBot {
 			let data = ruuvitag.last_data;
 
 			if (!data) {
-				msg.reply.text("Not connected!");
+				msg.reply.text("Ruuvitag unreachable!");
 			} else {
 				let battery;
 
@@ -84,11 +84,6 @@ class RuuviTelegramBot {
 				msg.reply.text(response);
 			}
 		}
-	}
-
-	start() {
-		// start bot
-		this.bot.start();
 	}
 }
 
