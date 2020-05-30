@@ -68,9 +68,9 @@ class RuuviTelegramBot {
 				let pressure = data.pressure / 100;
 
 				const response = " > Ruuvitag (" + ruuvitag.ruuviid + ") @ " + ruuvitag.location + "\n" +
-					" * Temperature: " + data.temperature + " °C\n" +
-					" * Humidity:    " + data.humidity + "% RH\n" +
-					" * Pressure:    " + pressure + " mbar\n" +
+					" * Temperature: " + data.temperature.toFixed(2)  + " °C\n" +
+					" * Humidity:    " + data.humidity.toFixed(2)  + "% RH\n" +
+					" * Pressure:    " + pressure.toFixed(2)  + " hPa\n" +
 					" * Battery:     " + data.battery + " mV \n";
 
 				msg.reply.text(response);
