@@ -63,17 +63,26 @@ class RuuviTelegramBot {
 			let data = ruuvitag.last_data;
 
 			if (!data) {
-				msg.reply.text("Ruuvitag unreachable!");
+				let parseMode = 'html';
+				const response = "<pre> &#9660; " + ruuvitag.location + " unreachable! </pre>";
+				return bot.sendMessage(
+					msg.from.id, response, {parseMode}
+				);
 			} else {
 				let pressure = data.pressure / 100;
 
-				const response = " > Ruuvitag (" + ruuvitag.mac + ") @ " + ruuvitag.location + "\n" +
-					" * Temperature: " + data.temperature.toFixed(2)  + " °C\n" +
-					" * Humidity:    " + data.humidity.toFixed(2)  + " % RH\n" +
-					" * Pressure:    " + pressure.toFixed(2)  + " hPa\n" +
-					" * Battery:     " + data.battery + " mV \n";
+				const response = "<pre> &#9660; " + ruuvitag.location + "\n" +
 
-				msg.reply.text(response);
+				"  &#127777; <strong>" + data.temperature.toFixed(2)  + " °C </strong>\n" +
+				"  &#128167; " + data.humidity.toFixed(2)  + " % RH\n" +
+				"  &#127788; " + pressure.toFixed(2)  + " hPa\n" +
+				"  &#128267; " + data.battery + " mV \n" +
+				"</pre>"
+
+				let parseMode = 'html';
+				return bot.sendMessage(
+					msg.from.id, response, {parseMode}
+				);
 			}
 		}
 	}
