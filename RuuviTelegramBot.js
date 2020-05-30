@@ -71,7 +71,7 @@ class RuuviTelegramBot {
 					" * Temperature: " + data.temperature + " °C\n" +
 					" * Humidity:    " + data.humidity + "% RH\n" +
 					" * Pressure:    " + pressure + " mbar\n" +
-					" * Battery:     " + data.battery + "% \n";
+					" * Battery:     " + data.battery + " mV \n";
 
 				msg.reply.text(response);
 			}
