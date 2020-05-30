@@ -65,21 +65,13 @@ class RuuviTelegramBot {
 			if (!data) {
 				msg.reply.text("Ruuvitag unreachable!");
 			} else {
-				let battery;
-
-				if (data.battery > 3000) {
-					battery = 100;
-				} else {
-					battery = (3000 / data.battery) * 100;
-				}
-
 				let pressure = data.pressure / 100;
 
 				const response = " > Ruuvitag (" + ruuvitag.ruuviid + ") @ " + ruuvitag.location + "\n" +
+					" * Temperature: " + data.temperature + " °C\n" +
 					" * Humidity:    " + data.humidity + "% RH\n" +
-					" * Pressure:    " + pressure + " hPa\n" +
-					" * Temperature: " + data.temperature + " C° \n" +
-					" * Battery:     " + battery + "% \n";
+					" * Pressure:    " + pressure + " mbar\n" +
+					" * Battery:     " + data.battery + "% \n";
 
 				msg.reply.text(response);
 			}
