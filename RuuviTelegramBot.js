@@ -17,7 +17,12 @@ class RuuviTelegramBot {
 		// set up listeners: on tag found
 		ruuvi.on("found", tag => {
 			tag.on("updated", data => {
-				ruuvitags[tag.id].last_data = data;
+				if( ruuvitags[tag.id] != undefined ) {
+					ruuvitags[tag.id].last_data = data;
+				}
+				else {
+					console.log("Received unrecognized tag: " + JSON.stringify(tag));
+				}
 			});
 		});
 
@@ -29,7 +34,7 @@ class RuuviTelegramBot {
 				response += "/" + element + "\n";
 			});
 
-			response += "/all_available_ruuvitags\n";
+			response += "/all\n";
 
 			msg.reply.text(response);
 		});
@@ -40,7 +45,7 @@ class RuuviTelegramBot {
 			});
 		});
 
-		bot.on(["/all_available_ruuvitags"], (msg) => {
+		bot.on(["/all"], (msg) => {
 			places.forEach(function (element) {
 				returnData(msg, retrieveData(element));
 			})
@@ -64,20 +69,19 @@ class RuuviTelegramBot {
 
 			if (!data) {
 				let parseMode = 'html';
-				const response = "<pre> &#9660; " + ruuvitag.location + " unreachable! </pre>";
+				const response = "&#9660; " + ruuvitag.location + " unreachable!";
 				return bot.sendMessage(
 					msg.from.id, response, {parseMode}
 				);
 			} else {
 				let pressure = data.pressure / 100;
 
-				const response = "<pre> &#9660; " + ruuvitag.location + "\n" +
+				const response = "&#9660; " + ruuvitag.location + "\n" +
 
-				"  &#127777; <strong>" + data.temperature.toFixed(2)  + " °C </strong>\n" +
-				"  &#128167; " + data.humidity.toFixed(2)  + " % RH\n" +
-				"  &#127788; " + pressure.toFixed(2)  + " hPa\n" +
-				"  &#128267; " + data.battery + " mV \n" +
-				"</pre>"
+				"&#127777; <strong>" + data.temperature.toFixed(2)  + "°C</strong>\n" +
+				"&#128167; " + data.humidity.toFixed(2)  + "%RH\n" +
+				"&#127788; " + pressure.toFixed(2)  + "hPa\n" +
+				"&#128267; " + data.battery + "mV\n" 
 
 				let parseMode = 'html';
 				return bot.sendMessage(
