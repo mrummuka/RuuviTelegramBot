@@ -5,7 +5,7 @@
   "main": "RuuviTelegramBot",
   "dependencies": {
     "node-ruuvitag": "^4.5.0",
-    "telebot": "^1.4.0"
+    "telebot": "git+https://github.com/mrummuka/telebot.git"
   },
   "repository": {
     "type": "git",
